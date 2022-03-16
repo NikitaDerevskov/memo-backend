@@ -14,7 +14,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/register', (req, res) => {
-    res.send('register');
     return reg.handleRegistartion(req, res);
 })
 

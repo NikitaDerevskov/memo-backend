@@ -1,5 +1,5 @@
 TODO:
-- Add eslint
+- Add lint +
 - Configure ts better
 - Add CI/CD
 - Add auth
@@ -8,3 +8,4 @@ TODO:
 - Add swagger
 - Add some watch to better dev exp
 - Check express documentation , i saw express -generator
+- Add alias

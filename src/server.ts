@@ -1,24 +1,20 @@
 import express from 'express';
-import * as registration from "./controllers/Registration"
+import handleRegistration from './controllers/Registration';
 
 const app = express();
 const port = 3000;
 
-
-app.get('/', (req, res) => {
-    console.log('test')
-    res.send('Hell1o');
+app.get('/', (req: express.Request, res: express.Response) => {
+  console.log('test');
+  res.send('Hell1o');
 });
 
-app.post('/api/register', (req, res) => {
-    return registration.handleRegistartion(req, res);
-})
+app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res));
 
-app.post('/api/login', (req, res) => {
-    console.log('/login');
-    return ;
-})
+app.post('/api/login', (req: express.Request, res:express.Response) => {
+  console.log('/login', req, res);
+});
 
 app.listen(port, () => {
-    console.log(`server is listening on ${port}`);
+  console.log(`server is listening on ${port}`);
 });

@@ -1,11 +1,8 @@
 import express from 'express';
-// import * as registration from "@/controllers/Registration"
+import * as registration from "./controllers/Registration"
 
-// TODO just for test , delete after
-const reg = require("./controllers/Registration")
 const app = express();
 const port = 3000;
-
 
 
 app.get('/', (req, res) => {
@@ -14,7 +11,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/register', (req, res) => {
-    return reg.handleRegistartion(req, res);
+    return registration.handleRegistartion(req, res);
 })
 
 app.post('/api/login', (req, res) => {

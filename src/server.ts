@@ -4,6 +4,8 @@ import handleRegistration from './controllers/Registration';
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 app.get('/', (req: express.Request, res: express.Response) => {
   console.log('test');
   res.send('Hell1o');

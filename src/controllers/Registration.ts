@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 
-const handleRegistration = async (req: express.Request, res: express.Response) => {
+const handleRegistration = async (req: express.Request, res: express.Response, db) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json('Incorrect form submission');
@@ -9,6 +9,7 @@ const handleRegistration = async (req: express.Request, res: express.Response) =
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
+  console.log(db)
   return res.send(hash);
 
   /*

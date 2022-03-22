@@ -32,7 +32,6 @@ const handleRegistration = async (req: express.Request, res: express.Response, d
   // const b = await db('users')
   //   .where('email', email);
   // res.send(b);
-  // TODO maybe save hash of password in user ?
 
   // return res.send(hash);
   // const test2 = await db('users').where('email', email);
@@ -43,6 +42,7 @@ const handleRegistration = async (req: express.Request, res: express.Response, d
   * TODO Check if this user exist (send message User with this email already exist.) +
   *  If no - create in database +
   * TODO insert hash to database
+  * TODO change database (save hash of password in user)
   * */
 };
 

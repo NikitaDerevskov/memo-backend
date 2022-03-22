@@ -1,6 +1,6 @@
 import express from 'express';
-import handleRegistration from './controllers/Registration';
 import knex from 'knex';
+import handleRegistration from './controllers/Registration';
 
 const app = express();
 const port = 3000;

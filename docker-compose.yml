@@ -10,7 +10,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      POSTGRES_URI: postgres://admin:password@postgres:5432/memo-backend
+      POSTGRES_URI: postgres://root:root@postgres:5432/root
   postgres:
     build: ./postgres
     restart: always

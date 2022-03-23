@@ -2,10 +2,14 @@ import bcrypt from 'bcryptjs';
 import { Knex } from 'knex';
 import express from 'express';
 
-const handleRegistration = async (req: express.Request, res: express.Response, db: Knex<any, unknown[]>) => {
+const handleRegistration = async (
+  req: express.Request,
+  res: express.Response,
+  db: Knex<any, unknown[]>,
+): Promise<void> => {
   const { email, password, name } = req.body;
   if (!email || !password || !name) {
-    return res.status(400).json('Incorrect form submission');
+    res.status(400).json('Incorrect form submission');
   }
 
   const userWithThisEmail = await db('users')
@@ -18,7 +22,7 @@ const handleRegistration = async (req: express.Request, res: express.Response, d
   const userExist = userWithThisEmail[0];
 
   if (userExist) {
-    return res.status(400).json('User with current email already exist');
+    res.status(400).json('User with current email already exist');
   }
 
   const salt = await bcrypt.genSalt(10);

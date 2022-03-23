@@ -1,5 +1,7 @@
 import express from 'express';
 import knex from 'knex';
+import { createClient } from 'redis';
+
 import handleRegistration from './controllers/Registration';
 
 const app = express();
@@ -13,12 +15,14 @@ const db = knex({
   searchPath: ['knex', 'public'],
 });
 
+const redisClient = createClient({ url: process.env.REDIS_URI});
+
 app.get('/', (req: express.Request, res: express.Response) => {
   console.log('test');
   res.send('Hell1o');
 });
 
-app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db));
+app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db, redisClient));
 
 app.post('/api/login', (req: express.Request, res:express.Response) => {
   console.log('/login', req, res);

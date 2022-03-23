@@ -6,10 +6,11 @@ const handleRegistration = async (
   req: express.Request,
   res: express.Response,
   db: Knex<any, unknown[]>,
-): Promise<void> => {
+  redisClient: any, // TODO change type
+): Promise<any> => { // TODO change type
   const { email, password, name } = req.body;
   if (!email || !password || !name) {
-    res.status(400).json('Incorrect form submission');
+    return res.status(400).json('Incorrect form submission');
   }
 
   const userWithThisEmail = await db('users')
@@ -22,7 +23,7 @@ const handleRegistration = async (
   const userExist = userWithThisEmail[0]; // TODO add type to user
 
   if (userExist) {
-    res.status(400).json('User with current email already exist');
+    return res.status(400).json('User with current email already exist');
   }
 
   const salt: string = await bcrypt.genSalt(10);
@@ -35,16 +36,9 @@ const handleRegistration = async (
   const user = await db('users')
     .where('email', email); // TODO remove and just send data , which i insert before
 
-  res.send(user);
-
-  /*
-  * TODO create hash +
-  * TODO Check if this user exist (send message User with this email already exist.) +
-  *  If no - create in database +
-  * TODO insert hash to database +
-  * TODO change database (save hash of password in user) +
-  * TODO add to redis
-  * */
+  await redisClient.connect(); // TODO extract this
+  await redisClient.set(email, hash);
+  return res.send(user);
 };
 
 export default handleRegistration;

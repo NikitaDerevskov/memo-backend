@@ -10,3 +10,6 @@ TODO:
 - Check express documentation , i saw express -generator
 - Add alias
 - Add unit tests
+- Add logs
+- Add work with cors
+- Add sentry or somethings like this

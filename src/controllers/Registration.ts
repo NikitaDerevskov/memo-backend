@@ -19,21 +19,21 @@ const handleRegistration = async (
       return [];
     });
 
-  const userExist = userWithThisEmail[0];
+  const userExist = userWithThisEmail[0]; // TODO add type to user
 
   if (userExist) {
     res.status(400).json('User with current email already exist');
   }
 
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
+  const salt: string = await bcrypt.genSalt(10);
+  const hash: string = await bcrypt.hash(password, salt);
 
   await db('users').insert({
     email, name, password: hash, joined: new Date().toISOString(),
   }).catch(() => res.status(500).json('Error in insert data in db'));
 
   const user = await db('users')
-    .where('email', email);
+    .where('email', email); // TODO remove and just send data , which i insert before
 
   res.send(user);
 

@@ -9,16 +9,14 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
 
   lint:
-
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Run lint

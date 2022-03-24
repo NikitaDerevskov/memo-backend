@@ -1,5 +1,5 @@
 import express from 'express';
-import { redisClient } from '../server';
+import { redisClient } from '../redis';
 
 const requireAuth = async (
   req: express.Request,

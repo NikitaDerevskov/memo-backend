@@ -19,5 +19,5 @@ jobs:
       - name: Test1
         run: docker-compose ps
       - name: Test2
-        run: docker run --network container:memo-backend_memo-backend_1 appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
+        run: docker run --network container:memo-backend_memo-backend_1 appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
      

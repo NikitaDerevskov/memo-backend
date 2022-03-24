@@ -17,3 +17,10 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
 
+  lint:
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run lint
+        run: docker-compose exec memo-backend npm i; docker-compose exec memo-backend npm run lint
+

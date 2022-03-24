@@ -1,26 +1,32 @@
 import bcrypt from 'bcryptjs';
 import { Knex } from 'knex';
 import express from 'express';
+import { createClient } from 'redis';
+import type { User } from '../types/User';
+
+type RedisClientType = ReturnType<typeof createClient>;
 
 const handleRegistration = async (
   req: express.Request,
   res: express.Response,
   db: Knex<any, unknown[]>,
-  redisClient: any, // TODO change type
-): Promise<any> => { // TODO change type
+  redisClient: RedisClientType,
+): Promise<express.Response> => {
   const { email, password, name } = req.body;
   if (!email || !password || !name) {
     return res.status(400).json('Incorrect form submission');
   }
 
-  const userWithThisEmail = await db('users')
-    .where('email', email)
-    .catch(() => {
-      res.status(500).json('Error in get user with this email');
-      return [];
-    });
+  const handleErrorInSearchUser = () => {
+    res.status(500).json('Error in get user with this email');
+    return [];
+  };
 
-  const userExist = userWithThisEmail[0]; // TODO add type to user
+  const userWithThisEmail: Array<User | undefined> = await db('users')
+    .where('email', email)
+    .catch(handleErrorInSearchUser);
+
+  const userExist: User | undefined = userWithThisEmail[0];
 
   if (userExist) {
     return res.status(400).json('User with current email already exist');
@@ -33,11 +39,11 @@ const handleRegistration = async (
     email, name, password: hash, joined: new Date().toISOString(),
   }).catch(() => res.status(500).json('Error in insert data in db'));
 
-  const user = await db('users')
-    .where('email', email); // TODO remove and just send data , which i insert before
+  const user: Array<User | undefined> = await db('users')
+    .where('email', email)
+    .catch(handleErrorInSearchUser);
 
-  await redisClient.connect(); // TODO extract this
-  await redisClient.set(email, hash);
+  await redisClient.set(hash, email);
   return res.send(user);
 };
 

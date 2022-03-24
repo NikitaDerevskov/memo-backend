@@ -15,7 +15,8 @@ const db = knex({
   searchPath: ['knex', 'public'],
 });
 
-const redisClient = createClient({ url: process.env.REDIS_URI});
+const redisClient = createClient({ url: process.env.REDIS_URI });
+redisClient.connect().then(() => console.log('Redis connected'));
 
 app.get('/', (req: express.Request, res: express.Response) => {
   console.log('test');

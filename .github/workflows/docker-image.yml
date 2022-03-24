@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
-      - name: Test
+      - name: Test1
+        run: docker-compose ps
+      - name: Test2
         run: docker run --network container:memo-backend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
      

@@ -2,12 +2,12 @@ TODO:
 - Add lint +
 - Configure ts better +
 - Add CI/CD
-- Add auth
+- Add auth +
 - Add docker, docker-compose +
-- Add redis
+- Add redis +
 - Add swagger
 - Add some watch to better dev exp +
-- Check express documentation , i saw express -generator
+- Check express documentation , i saw express -generator +
 - Add alias
 - Add unit tests
 - Add logs

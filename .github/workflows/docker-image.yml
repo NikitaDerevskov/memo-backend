@@ -20,5 +20,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run lint
-        run: docker-compose exec memo-backend npm i; docker-compose exec memo-backend npm run lint
+        run: docker-compose exec memo-backend_memo-backend_1 npm i; docker-compose exec memo-backend_memo-backend_1 npm run lint
 

@@ -23,5 +23,5 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
       - name: Run lint
-        run: docker-compose exec memo-backend npm i; docker-compose exec memo-backend npm run lint
+        run: docker-compose exec -T memo-backend npm i; docker-compose exec -T memo-backend npm run lint
 

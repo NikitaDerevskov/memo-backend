@@ -1,7 +1,7 @@
 TODO:
 - Add lint +
 - Configure ts better +
-- Add CI/CD
+- Add CI/CD +
 - Add auth +
 - Add docker, docker-compose +
 - Add redis +

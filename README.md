@@ -13,3 +13,9 @@ TODO:
 - Add logs
 - Add work with cors
 - Add sentry or somethings like this
+- Add oauth
+- Deploy to server
+- New Relic?
+- orm?
+- Websocket?
+- How to work with .env vars?

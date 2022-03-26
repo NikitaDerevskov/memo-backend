@@ -1,16 +1,13 @@
 import bcrypt from 'bcryptjs';
 import { Knex } from 'knex';
 import express from 'express';
-import { createClient } from 'redis';
+import jwt from 'jsonwebtoken';
 import type { User } from '../types/User';
-
-type RedisClientType = ReturnType<typeof createClient>;
 
 const handleRegistration = async (
   req: express.Request,
   res: express.Response,
   db: Knex<any, unknown[]>,
-  redisClient: RedisClientType,
 ): Promise<express.Response> => {
   const { email, password, name } = req.body;
   if (!email || !password || !name) {
@@ -43,8 +40,19 @@ const handleRegistration = async (
     .where('email', email)
     .catch(handleErrorInSearchUser);
 
-  await redisClient.set(hash, email);
-  return res.send(user);
+  if (user) {
+    const maxAge = 3 * 60 * 60;
+    const secret = String(process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { id: user[0]?.id, username: user[0]?.name },
+      secret,
+      {
+        expiresIn: maxAge, // 3hrs in sec
+      },
+    );
+    return res.send(token);
+  }
+  return res.send('Error in get user from db');
 };
 
 export default handleRegistration;

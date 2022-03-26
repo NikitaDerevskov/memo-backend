@@ -1,15 +1,12 @@
 import express from 'express';
 import { Knex } from 'knex';
 import bcrypt from 'bcryptjs';
-import { createClient } from 'redis';
-
-type RedisClientType = ReturnType<typeof createClient>;
+import jwt from 'jsonwebtoken';
 
 const signIn = async (
   req: express.Request,
   res: express.Response,
   db: Knex<any, unknown[]>,
-  redisClient: RedisClientType,
 ) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -28,9 +25,17 @@ const signIn = async (
     return res.status(400).json('Incorrect email or password');
   }
 
-  await redisClient.set(user[0].password, email);
+  const maxAge = 3 * 60 * 60;
+  const secret = String(process.env.JWT_SECRET);
+  const token = jwt.sign(
+    { id: user[0]?.id, username: user[0]?.name },
+    secret,
+    {
+      expiresIn: maxAge, // 3hrs in sec
+    },
+  );
 
-  return res.send(user);
+  return res.send(token);
 };
 
 export default signIn;

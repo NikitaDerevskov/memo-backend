@@ -1,22 +1,24 @@
 TODO:
-- Add lint +
-- Configure ts better +
-- Add CI/CD +
-- Add auth +
-- Add docker, docker-compose +
-- Add redis +
-- Add swagger
-- Add some watch to better dev exp +
-- Check express documentation , i saw express -generator +
-- Add alias
-- Add unit tests
-- Add logs +
-- Add work with cors
-- Add sentry or something like this
-- Add oauth
-- Deploy to server
-- New Relic?
-- orm?
-- Websocket?
-- How to work with .env vars?
-- Add arch? :)
+- [x] Add lint +
+- [x] Configure ts better +
+- [x] Add CI/CD +
+- [x] Add auth +
+- [x] Add docker, docker-compose +
+- [x] Add redis +
+- [ ] Add swagger
+- [x] Add some watch to better dev exp +
+- [x] Check express documentation , i saw express -generator +
+- [ ] Add alias
+- [ ] Add unit tests
+- [x] Add logs +
+- [x] Add work with cors
+- [ ] Add sentry or something like this
+- [ ] Add oauth
+- [ ] Deploy to server
+- [ ] New Relic?
+- [ ] orm?
+- [ ] Websocket?
+- [ ] How to work with .env vars?
+- [ ] Add arch? :)
+- [x] Add helmet 
+- [ ] Add good readme

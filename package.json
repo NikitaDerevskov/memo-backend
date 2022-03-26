@@ -10,10 +10,12 @@
   "author": "Nikita Derevskov",
   "license": "ISC",
   "dependencies": {
+    "@types/helmet": "^4.0.0",
     "@types/morgan": "^1.9.3",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "helmet": "^5.0.2",
     "knex": "^1.0.4",
     "morgan": "^1.10.0",
     "pg": "^8.7.3",

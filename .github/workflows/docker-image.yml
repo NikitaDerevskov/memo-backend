@@ -24,7 +24,7 @@ jobs:
           node-version: 17.3.1
 
       - name: Install dependencies
-        run: npm install
+        run: mkdir ~/.npm-global; npm config set prefix '~/.npm-global'; export PATH=~/.npm-global/bin:$PATH; source ~/.profile; npm install
 
       - name: Run tests
         run: npm run lint

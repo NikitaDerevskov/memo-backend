@@ -7,7 +7,6 @@ import redisClient from './redis';
 import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';
 import requireAuth from './controllers/Auth';
-import logout from './controllers/Logout';
 
 const app = express();
 const port = 3000;
@@ -27,7 +26,6 @@ const db = knex({
 
 app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db));
 app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db));
-app.get('/api/logout', (req: express.Request, res:express.Response) => logout(req, res));
 app.get('/test', requireAuth, (req, res) => {
   res.send('You are good');
 });

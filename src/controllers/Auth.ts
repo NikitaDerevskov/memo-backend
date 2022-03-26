@@ -1,6 +1,5 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import redisClient from '../redis';
 
 const requireAuth = async (
   req: express.Request,
@@ -13,11 +12,9 @@ const requireAuth = async (
     return res.status(401).send('Unauthorized');
   }
 
-  const authToken = await redisClient.get(authorization);
   const secret = String(process.env.JWT_SECRET);
   const jwtFreshAndCorrect = jwt.verify(authorization, secret);
 
-  console.log('authToken', authToken);
   if (jwtFreshAndCorrect) {
     return next();
   }

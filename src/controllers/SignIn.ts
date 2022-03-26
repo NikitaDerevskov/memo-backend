@@ -1,16 +1,12 @@
 import express from 'express';
 import { Knex } from 'knex';
 import bcrypt from 'bcryptjs';
-import { createClient } from 'redis';
 import jwt from 'jsonwebtoken';
-
-type RedisClientType = ReturnType<typeof createClient>;
 
 const signIn = async (
   req: express.Request,
   res: express.Response,
   db: Knex<any, unknown[]>,
-  redisClient: RedisClientType,
 ) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -38,8 +34,6 @@ const signIn = async (
       expiresIn: maxAge, // 3hrs in sec
     },
   );
-
-  await redisClient.set(token, token);
 
   return res.send(token);
 };

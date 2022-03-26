@@ -25,8 +25,8 @@ const db = knex({
   searchPath: ['knex', 'public'],
 });
 
-app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db, redisClient));
-app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db, redisClient));
+app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db));
+app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db));
 app.get('/api/logout', (req: express.Request, res:express.Response) => logout(req, res));
 app.get('/test', requireAuth, (req, res) => {
   res.send('You are good');

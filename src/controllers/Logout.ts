@@ -1,5 +1,5 @@
 import express from 'express';
-import { redisClient } from '../redis';
+import redisClient from '../redis';
 
 const logout = async (
   req: express.Request,

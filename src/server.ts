@@ -1,6 +1,6 @@
 import express from 'express';
 import knex from 'knex';
-import { redisClient } from './redis';
+import redisClient from './redis';
 
 import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';

@@ -27,7 +27,7 @@ jobs:
         run: sudo npm install
 
       - name: Run tests
-        run: npm run lint
+        run: sudo npm run lint
 
       - name: Stop containers
         if: always()

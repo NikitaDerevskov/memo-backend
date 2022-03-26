@@ -31,5 +31,3 @@ jobs:
       # build and test the apps
       - name: lint
         run: npm run lint
-
-            echo ${{ steps.docker_build.outputs.digest }}

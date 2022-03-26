@@ -16,5 +16,8 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
   ],
-  ignorePatterns: [".eslintrc.js"]
+  ignorePatterns: [".eslintrc.js"],
+  rules: {
+    'no-console': 'off',
+  },
 };

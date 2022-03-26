@@ -1,4 +1,15 @@
-TODO:
+# Memo backend
+
+This is an application with cards for better memorization of things.
+
+P.S:
+This project was created for the purpose of testing. Where can I check some things.
+
+## How to set up (TODO)
+
+- docker-compose up --build
+
+## TODO:
 - [x] Add lint +
 - [x] Configure ts better +
 - [x] Add CI/CD +
@@ -21,4 +32,4 @@ TODO:
 - [ ] How to work with .env vars?
 - [ ] Add arch? :)
 - [x] Add helmet 
-- [ ] Add good readme
+- [x] Add good readme

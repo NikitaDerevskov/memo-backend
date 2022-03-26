@@ -2,6 +2,7 @@ import express from 'express';
 import { Knex } from 'knex';
 import bcrypt from 'bcryptjs';
 import { createClient } from 'redis';
+import jwt from 'jsonwebtoken';
 
 type RedisClientType = ReturnType<typeof createClient>;
 
@@ -28,9 +29,19 @@ const signIn = async (
     return res.status(400).json('Incorrect email or password');
   }
 
-  await redisClient.set(user[0].password, email);
+  const maxAge = 3 * 60 * 60;
+  const secret = String(process.env.JWT_SECRET);
+  const token = jwt.sign(
+    { id: user[0]?.id, username: user[0]?.name },
+    secret,
+    {
+      expiresIn: maxAge, // 3hrs in sec
+    },
+  );
 
-  return res.send(user);
+  await redisClient.set(token, token);
+
+  return res.send(token);
 };
 
 export default signIn;

@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import redisClient from '../redis';
 
 const requireAuth = async (
@@ -6,14 +7,18 @@ const requireAuth = async (
   res: express.Response,
   next: any,
 ) => {
-  const { authorization } = req.headers;
+  const authorization = req?.headers?.authorization?.split(' ')[1];
 
   if (!authorization) {
     return res.status(401).send('Unauthorized');
   }
 
   const authToken = await redisClient.get(authorization);
-  if (authToken) {
+  const secret = String(process.env.JWT_SECRET);
+  const jwtFreshAndCorrect = jwt.verify(authorization, secret);
+
+  console.log('authToken', authToken);
+  if (jwtFreshAndCorrect) {
     return next();
   }
   return res.status(401).send('Unauthorized');

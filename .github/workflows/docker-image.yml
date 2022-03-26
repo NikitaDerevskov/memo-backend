@@ -8,7 +8,7 @@ on:
 
 jobs:
   Tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # TODO change to not latest , for some version.
     strategy:
       matrix:
         node-version: [17.3.1]
@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup node
-        uses: actions/setup-node@master
-        with:
-          node-version: ${{ matrix.node-version }}
+#      - name: Setup node
+#        uses: actions/setup-node@master
+#        with:
+#          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm install

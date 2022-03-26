@@ -17,17 +17,17 @@ jobs:
 
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
+#
+#      - name: Install node
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: 17.3.1
 
-      - name: Install node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 17.3.1
-
-      - name: Install dependencies
-        run: sudo npm install
-
-      - name: Run tests
-        run: sudo npm run lint
+      - name: Run lint
+        run: docker exec -it memo-backend_web_1 npm run lint
+#
+#      - name: Run tests
+#        run: sudo npm run lint
 
       - name: Stop containers
         if: always()

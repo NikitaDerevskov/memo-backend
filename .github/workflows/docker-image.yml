@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build_test:
+  Tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,5 +23,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
       - name: Lint
         run: npm run lint

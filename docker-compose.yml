@@ -12,6 +12,7 @@ services:
     environment:
       POSTGRES_URI: postgres://root:root@postgres:5432/root
       REDIS_URI: redis://redis:6379
+      JWT_SECRET: "${JWT_SECRET}"
   postgres:
     build: ./postgres
     restart: always

@@ -7,28 +7,29 @@ on:
     branches: [ main ]
 
 jobs:
-  docker:
-    timeout-minutes: 10
+  # This workflow contains multiple jobs
+  build_test:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [17.x]
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-      - name: Start containers
-        run: docker-compose -f "docker-compose.yml" up -d --build
-#
-#      - name: Install node
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: 17.3.1
+      - name: setup node
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      - name: Run lint
-        run: docker exec -t memo-backend_web_1 npm i; npm run lint
-#
-#      - name: Run tests
-#        run: sudo npm run lint
+      # install applicaion dependencies
+      - name: Install dependencies
+        run: npm install
+      # build and test the apps
+      - name: lint
+        run: npm run lint
 
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f "docker-compose.yml" down
+            echo ${{ steps.docker_build.outputs.digest }}

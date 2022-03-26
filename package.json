@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"nodemon dist/server.js\"",
-    "lint": "./node_modules/.bin/eslint --ext .ts src"
+    "lint": "eslint --ext .ts src"
   },
   "author": "Nikita Derevskov",
   "license": "ISC",

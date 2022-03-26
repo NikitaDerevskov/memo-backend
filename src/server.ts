@@ -1,6 +1,7 @@
 import express from 'express';
 import knex from 'knex';
 import morgan from 'morgan';
+import helmet from 'helmet';
 import redisClient from './redis';
 import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';
@@ -12,6 +13,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(morgan('common'));
+app.use(helmet());
 
 const db = knex({
   client: 'pg',

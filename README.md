@@ -10,12 +10,13 @@ TODO:
 - Check express documentation , i saw express -generator +
 - Add alias
 - Add unit tests
-- Add logs
+- Add logs +
 - Add work with cors
-- Add sentry or somethings like this
+- Add sentry or something like this
 - Add oauth
 - Deploy to server
 - New Relic?
 - orm?
 - Websocket?
 - How to work with .env vars?
+- Add arch? :)

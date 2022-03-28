@@ -29,7 +29,7 @@ This project was created for the purpose of testing. Where can I check some thin
 - [ ] New Relic?
 - [ ] orm?
 - [ ] Websocket?
-- [ ] How to work with .env vars?
+- [x] How to work with .env vars?
 - [ ] Add arch? :)
 - [x] Add helmet 
 - [x] Add good readme

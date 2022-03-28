@@ -13,12 +13,16 @@ const requireAuth = async (
   }
 
   const secret = String(process.env.JWT_SECRET);
-  const jwtFreshAndCorrect = jwt.verify(authorization, secret);
 
-  if (jwtFreshAndCorrect) {
-    return next();
+  try {
+    const jwtFreshAndCorrect = jwt.verify(authorization, secret);
+    if (jwtFreshAndCorrect) {
+      return next();
+    }
+    return res.status(401).send('Unauthorized');
+  } catch {
+    return res.status(401).send('Unauthorized');
   }
-  return res.status(401).send('Unauthorized');
 };
 
 export default requireAuth;

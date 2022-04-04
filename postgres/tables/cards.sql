@@ -5,6 +5,7 @@ CREATE TABLE cards (
     title VARCHAR(100),
     content VARCHAR(5000),
     created TIMESTAMP NOT NULL,
+    last_modified TIMESTAMP NOT NULL,
     folder_id integer not null references folders(id)
 );
 

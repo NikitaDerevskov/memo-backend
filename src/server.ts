@@ -36,7 +36,7 @@ app.get('/test', requireAuth, (req, res) => {
 app.post(
   '/api/create-folder',
   requireAuth,
-  (req: express.Request, res: express.Response) => folders.createFolder(req, res),
+  (req: express.Request, res: express.Response) => folders.createFolder(req, res, db, redisClient),
 );
 
 /* */

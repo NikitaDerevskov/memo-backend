@@ -3,11 +3,14 @@ import { Knex } from 'knex';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import type { User } from '../types/User';
+import { RedisClientType } from '../types/UtilsTypes';
 
+// TODO think - is it good login after registration?
 const handleRegistration = async (
   req: express.Request,
   res: express.Response,
   db: Knex<any, unknown[]>,
+  redisClient: RedisClientType,
 ): Promise<express.Response> => {
   const { email, password, name } = req.body;
   if (!email || !password || !name) {
@@ -36,20 +39,23 @@ const handleRegistration = async (
     email, name, password: hash, joined: new Date().toISOString(),
   }).catch(() => res.status(500).json('Error in insert data in db'));
 
-  const user: Array<User | undefined> = await db('users')
+  const user: Array<User> = await db('users')
     .where('email', email)
     .catch(handleErrorInSearchUser);
 
   if (user) {
     const maxAge = 3 * 60 * 60;
     const secret = String(process.env.JWT_SECRET);
+    const id = user[0]?.id
     const token = jwt.sign(
-      { id: user[0]?.id, username: user[0]?.name },
+      { id, username: user[0]?.name },
       secret,
       {
         expiresIn: maxAge, // 3hrs in sec
       },
     );
+
+    await redisClient.set(token, id);
     return res.send(token);
   }
   return res.send('Error in get user from db');

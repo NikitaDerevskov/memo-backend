@@ -33,3 +33,4 @@ This project was created for the purpose of testing. Where can I check some thin
 - [ ] Add arch? :)
 - [x] Add helmet 
 - [x] Add good readme
+- [ ] Verify email

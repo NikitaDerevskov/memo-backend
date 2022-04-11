@@ -46,7 +46,7 @@ const handleRegistration = async (
   if (user) {
     const maxAge = 3 * 60 * 60;
     const secret = String(process.env.JWT_SECRET);
-    const id = user[0]?.id
+    const id = user[0]?.id;
     const token = jwt.sign(
       { id, username: user[0]?.name },
       secret,
@@ -58,7 +58,7 @@ const handleRegistration = async (
     await redisClient.set(token, id);
     return res.send(token);
   }
-  return res.send('Error in get user from db');
+  return res.status(500).json('Error in insert data in db');
 };
 
 export default handleRegistration;

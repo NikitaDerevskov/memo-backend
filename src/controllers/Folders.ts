@@ -20,13 +20,14 @@ export const createFolder = async (
 
   const id = await redisClient.get(authorization);
   await db('folders').insert({
-    user_id: id, title, created: new Date().toISOString(),
+    title, created: new Date().toISOString(), user_id: id,
   }).catch(() => res.status(500).json('Error in insert data in db'));
 
   return res.status(201).json('Folder created');
 };
 
 export const renameFolder = () => 0;
+// TODO add pagination
 export const getFolders = () => 0;
 export const getFolder = () => 0;
 export const deleteFolder = () => 0;

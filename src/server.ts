@@ -7,6 +7,7 @@ import redisClient from './redis';
 import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';
 import requireAuth from './controllers/Auth';
+import * as folders from './controllers/Folders';
 
 const app = express();
 const port = 3000;
@@ -25,10 +26,20 @@ const db = knex({
 });
 
 app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db));
-app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db));
+app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db, redisClient));
 app.get('/test', requireAuth, (req, res) => {
   res.send('You are good');
 });
+
+/* Folders */
+
+app.post(
+  '/api/create-folder',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.createFolder(req, res),
+);
+
+/* */
 
 app.listen(port, () => {
   console.log(`server is listening on ${port}`);

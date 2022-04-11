@@ -8,7 +8,12 @@ export const createFolder = async (
   db: Knex<any, unknown[]>,
   redisClient: RedisClientType,
 ) => {
+  const authorization = req?.headers?.authorization?.split(' ')[1];
   const { title } = req.body;
+
+  if (!authorization) {
+    return res.status(400).send('Auth is incorrect');
+  }
 
   if (!title) {
     return res.status(400).json('Title is required');

@@ -2,8 +2,8 @@
 
 insert into users (name, email, password, joined) values ('a', 'a@a.com', '$2a$10$WAK21U0LWl7C//jJ.DOB2uPP1DJQh7KUDgasdyQeGzkop2Pzl8W7u', '2022-03-29T21:47:37.232Z');
 
-insert into folders (name, created, user_id) values ('How to', '2022-03-29T21:47:37.232Z', 1);
-insert into folders (name, created, user_id) values ('Git', '2022-03-29T21:47:37.232Z', 1);
+insert into folders (title, created, user_id) values ('How to', '2022-03-29T21:47:37.232Z', 1);
+insert into folders (title, created, user_id) values ('Git', '2022-03-29T21:47:37.232Z', 1);
 
 insert into cards (title, content, created, folder_id) values ('How to do it?', 'It is easy.', '2022-03-29T21:47:37.232Z', '2022-03-29T21:47:37.232Z', 1);
 insert into cards (title, content, created, folder_id) values ('How to google?', 'Just google', '2022-03-29T21:47:37.232Z', '2022-03-29T21:47:37.232Z', 1);

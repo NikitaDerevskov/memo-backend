@@ -2,7 +2,7 @@ BEGIN TRANSACTION;
 
 CREATE TABLE folders (
     id serial PRIMARY KEY,
-    name VARCHAR(100),
+    title VARCHAR(255),
     created TIMESTAMP NOT NULL,
     user_id integer not null references users(id)
 );

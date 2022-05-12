@@ -8,12 +8,8 @@ export const createFolder = async (
   db: Knex<any, unknown[]>,
   redisClient: RedisClientType,
 ) => {
-  const authorization = req?.headers?.authorization?.split(' ')[1];
+  const authorization = req.headers?.authorization?.split(' ')[1] || '';
   const { title } = req.body;
-
-  if (!authorization) {
-    return res.status(400).send('Auth is incorrect');
-  }
 
   if (!title) {
     return res.status(400).json('Title is required');
@@ -28,7 +24,28 @@ export const createFolder = async (
 };
 
 export const renameFolder = () => 0;
+
 // TODO add pagination
-export const getFolders = () => 0;
+export const getFolders = async (
+  req: express.Request,
+  res: express.Response,
+  db: Knex<any, unknown[]>,
+  redisClient: RedisClientType,
+) => {
+  const authorization = req.headers?.authorization?.split(' ')[1] || '';
+  const id = await redisClient.get(authorization);
+
+  const folders = await db('folders')
+    .where('user_id', id)
+    //  Add log
+    .catch(() => {
+      res.status(500).json('Error in get folders with this user id');
+      return [];
+    });
+
+  // TODO is it right?
+  return res.status(200).json(folders);
+};
+
 export const getFolder = () => 0;
 export const deleteFolder = () => 0;

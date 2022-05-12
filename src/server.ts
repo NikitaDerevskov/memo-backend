@@ -39,6 +39,12 @@ app.post(
   (req: express.Request, res: express.Response) => folders.createFolder(req, res, db, redisClient),
 );
 
+app.get(
+  '/api/get-folders',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.getFolders(req, res, db, redisClient),
+);
+
 /* */
 
 app.listen(port, () => {

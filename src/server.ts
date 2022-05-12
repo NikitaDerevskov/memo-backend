@@ -8,6 +8,7 @@ import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';
 import requireAuth from './controllers/Auth';
 import * as folders from './controllers/Folders';
+import * as cards from './controllers/Cards';
 
 const app = express();
 const port = 3000;
@@ -43,6 +44,22 @@ app.get(
   '/api/get-folders',
   requireAuth,
   (req: express.Request, res: express.Response) => folders.getFolders(req, res, db, redisClient),
+);
+
+/* */
+
+/* Cards */
+
+app.post(
+  '/api/create-card',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.createCard(req, res, db),
+);
+
+app.get(
+  '/api/get-cards',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.getCards(req, res, db),
 );
 
 /* */

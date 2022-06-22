@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({
-  origin: 'http://localhost:3000', // TODO add more before release
+  origin: 'http://localhost:3006', // TODO add more before release
 }));
 
 const db = knex({

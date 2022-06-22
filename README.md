@@ -7,6 +7,7 @@ This project was created for the purpose of testing. Where can I check some thin
 
 ## How to set up (TODO)
 
+- create .env and add JWT_SECRET
 - docker-compose up --build
 
 ## TODO:
@@ -34,3 +35,4 @@ This project was created for the purpose of testing. Where can I check some thin
 - [x] Add helmet 
 - [x] Add good readme
 - [ ] Verify email
+- [ ] Refactor please

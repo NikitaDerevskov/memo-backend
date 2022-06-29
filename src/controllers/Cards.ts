@@ -38,7 +38,7 @@ export const getCards = async (
   res: express.Response,
   db: Knex<any, unknown[]>,
 ) => {
-  const { folderId } = req.body;
+  const { folderId } = req.query;
   if (!folderId) {
     return res.status(400).json('folderId is required');
   }

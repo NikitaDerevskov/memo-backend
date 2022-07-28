@@ -57,6 +57,20 @@ export const getCards = async (
 
 export const getCard = () => 0;
 
-export const deleteCard = () => 0;
+// TODO add if error
+export const deleteCard = (
+  async (
+    req: express.Request,
+    res: express.Response,
+    db: Knex<any, unknown[]>,
+  ) => {
+    const { cardId } = req.query;
+
+    await db('cards')
+      .where('id', Number(cardId))
+      .del();
+
+    return res.status(200).send('Success');
+  });
 
 // TODO  only migrations library - watch it.

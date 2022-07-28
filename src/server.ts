@@ -62,6 +62,12 @@ app.get(
   (req: express.Request, res: express.Response) => cards.getCards(req, res, db),
 );
 
+app.delete(
+  '/api/delete-card',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.deleteCard(req, res, db),
+);
+
 /* */
 
 app.listen(port, () => {

@@ -46,6 +46,12 @@ app.get(
   (req: express.Request, res: express.Response) => folders.getFolders(req, res, db, redisClient),
 );
 
+app.delete(
+  '/api/delete-folder',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.deleteFolder(req, res, db),
+);
+
 /* */
 
 /* Cards */

@@ -48,4 +48,21 @@ export const getFolders = async (
 };
 
 export const getFolder = () => 0;
-export const deleteFolder = () => 0;
+
+/* TODO don't really delete folder, just mark as deleted! */
+// TODO add if error
+/* TODO this is looks same as delete card :), merge it */
+export const deleteFolder = (
+  async (
+    req: express.Request,
+    res: express.Response,
+    db: Knex<any, unknown[]>,
+  ) => {
+    const { folderId } = req.query;
+
+    await db('folders')
+      .where('id', Number(folderId))
+      .del();
+
+    return res.status(200).send('Success');
+  });

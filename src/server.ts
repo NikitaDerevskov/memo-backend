@@ -46,6 +46,8 @@ app.get(
   (req: express.Request, res: express.Response) => folders.getFolders(req, res, db, redisClient),
 );
 
+// TODO now everyone can delete/edit any card/folder.
+//  Change to that user can delete only his/her cards/folders.
 app.delete(
   '/api/delete-folder',
   requireAuth,

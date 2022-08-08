@@ -39,6 +39,7 @@ export const editCard = async (
   await db('cards')
     .where('id', Number(id))
     .update({ title, content });
+  /* TODO add last_modified from backend */
 
   /* TODO add error handling */
 

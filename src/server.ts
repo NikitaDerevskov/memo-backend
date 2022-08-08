@@ -82,6 +82,12 @@ app.delete(
   (req: express.Request, res: express.Response) => cards.deleteCard(req, res, db),
 );
 
+app.put(
+  '/api/edit-card',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.editCard(req, res, db),
+);
+
 /* */
 
 app.listen(port, () => {

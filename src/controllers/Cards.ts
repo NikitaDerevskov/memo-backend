@@ -29,14 +29,21 @@ export const createCard = async (
   return res.status(201).json('Card created');
 };
 
-// export const editCard = async (
-//   req: express.Request,
-//   res: express.Response,
-//   db: Knex<any, unknown[]>,
-// ) => {
-//   // TODO use PUT method.
-//   const { };
-// };
+export const editCard = async (
+  req: express.Request,
+  res: express.Response,
+  db: Knex<any, unknown[]>,
+) => {
+  const { title, id, content } = req.body;
+
+  await db('cards')
+    .where('id', Number(id))
+    .update({ title, content });
+
+  /* TODO add error handling */
+
+  return res.status(200).send('Success');
+};
 
 export const getCards = async (
   req: express.Request,

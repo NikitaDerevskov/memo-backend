@@ -23,8 +23,6 @@ export const createFolder = async (
   return res.status(201).json('Folder created');
 };
 
-export const renameFolder = () => 0;
-
 // TODO add pagination
 export const getFolders = async (
   req: express.Request,
@@ -47,8 +45,6 @@ export const getFolders = async (
   return res.status(200).json(folders);
 };
 
-export const getFolder = () => 0;
-
 /* TODO don't really delete folder, just mark as deleted! */
 // TODO add if error
 /* TODO this is looks same as delete card :), merge it */
@@ -66,3 +62,20 @@ export const deleteFolder = (
 
     return res.status(200).send('Success');
   });
+
+/* TODO user can modife only his folders */
+export const editFolder = async (
+  req: express.Request,
+  res: express.Response,
+  db: Knex<any, unknown[]>,
+) => {
+  const { title, folderId } = req.body;
+
+  await db('folders')
+    .where('id', Number(folderId))
+    .update({ title });
+
+  /* TODO add error handling */
+
+  return res.status(200).send('Success');
+};

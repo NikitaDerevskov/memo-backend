@@ -54,6 +54,12 @@ app.delete(
   (req: express.Request, res: express.Response) => folders.deleteFolder(req, res, db),
 );
 
+app.put(
+  '/api/edit-folder',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.editFolder(req, res, db),
+);
+
 /* */
 
 /* Cards */

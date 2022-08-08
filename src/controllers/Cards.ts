@@ -29,9 +29,14 @@ export const createCard = async (
   return res.status(201).json('Card created');
 };
 
-export const changeCardTitle = () => 0;
-
-export const createCardContent = () => 0;
+// export const editCard = async (
+//   req: express.Request,
+//   res: express.Response,
+//   db: Knex<any, unknown[]>,
+// ) => {
+//   // TODO use PUT method.
+//   const { };
+// };
 
 export const getCards = async (
   req: express.Request,

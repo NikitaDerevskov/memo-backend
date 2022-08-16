@@ -39,7 +39,7 @@ const signIn = async (
 
   await redisClient.set(token, user[0]?.id);
 
-  return res.send(token);
+  return res.send({ token, name: user[0]?.name });
 };
 
 export default signIn;

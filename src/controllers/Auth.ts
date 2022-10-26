@@ -6,7 +6,7 @@ const requireAuth = async (
   res: express.Response,
   next: any,
 ) => {
-  const authorization = req?.headers?.authorization?.split(' ')[1];
+  const authorization = req?.headers?.authorization;
 
   if (!authorization) {
     return res.status(401).send('Unauthorized');

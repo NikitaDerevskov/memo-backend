@@ -8,7 +8,7 @@ export const createFolder = async (
   db: Knex<any, unknown[]>,
   redisClient: RedisClientType,
 ) => {
-  const authorization = req.headers?.authorization?.split(' ')[1] || '';
+  const authorization = req.headers?.authorization || '';
   const { title } = req.body;
 
   if (!title) {
@@ -30,7 +30,7 @@ export const getFolders = async (
   db: Knex<any, unknown[]>,
   redisClient: RedisClientType,
 ) => {
-  const authorization = req.headers?.authorization?.split(' ')[1] || '';
+  const authorization = req.headers?.authorization || '';
   const id = await redisClient.get(authorization);
 
   const folders = await db('folders')

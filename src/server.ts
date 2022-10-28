@@ -6,7 +6,7 @@ import cors from 'cors';
 import redisClient from './redis';
 import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';
-import requireAuth from './controllers/Auth';
+import requireAuth, {getCurrentUser} from './controllers/Auth';
 import * as folders from './controllers/Folders';
 import * as cards from './controllers/Cards';
 
@@ -28,9 +28,12 @@ const db = knex({
 
 app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db, redisClient));
 app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db, redisClient));
-app.get('/test', requireAuth, (req, res) => {
-  res.send('You are good');
-});
+
+app.get(
+  '/api/me',
+  requireAuth,
+  (req: express.Request, res: express.Response) => getCurrentUser(req, res, db, redisClient),
+);
 
 /* Folders */
 

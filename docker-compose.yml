@@ -28,14 +28,13 @@ services:
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
-      PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+      PGADMIN_DEFAULT_EMAIL: "q@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "qwe"
     ports:
       - "16543:80"
     depends_on:
       - postgres
   redis:
-    container_name: redis
     image: redis
     ports:
       - "6379:6379"

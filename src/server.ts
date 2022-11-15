@@ -6,8 +6,9 @@ import cors from 'cors';
 import redisClient from './redis';
 import handleRegistration from './controllers/Registration';
 import signIn from './controllers/SignIn';
-import requireAuth from './controllers/Auth';
+import requireAuth, {getCurrentUser} from './controllers/Auth';
 import * as folders from './controllers/Folders';
+import * as cards from './controllers/Cards';
 
 const app = express();
 const port = 3000;
@@ -27,9 +28,12 @@ const db = knex({
 
 app.post('/api/register', (req:express.Request, res: express.Response) => handleRegistration(req, res, db, redisClient));
 app.post('/api/login', (req: express.Request, res:express.Response) => signIn(req, res, db, redisClient));
-app.get('/test', requireAuth, (req, res) => {
-  res.send('You are good');
-});
+
+app.get(
+  '/api/me',
+  requireAuth,
+  (req: express.Request, res: express.Response) => getCurrentUser(req, res, db, redisClient),
+);
 
 /* Folders */
 
@@ -37,6 +41,54 @@ app.post(
   '/api/create-folder',
   requireAuth,
   (req: express.Request, res: express.Response) => folders.createFolder(req, res, db, redisClient),
+);
+
+app.get(
+  '/api/get-folders',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.getFolders(req, res, db, redisClient),
+);
+
+// TODO now everyone can delete/edit any card/folder.
+//  Change to that user can delete only his/her cards/folders.
+app.delete(
+  '/api/delete-folder',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.deleteFolder(req, res, db),
+);
+
+app.put(
+  '/api/edit-folder',
+  requireAuth,
+  (req: express.Request, res: express.Response) => folders.editFolder(req, res, db),
+);
+
+/* */
+
+/* Cards */
+
+app.post(
+  '/api/create-card',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.createCard(req, res, db),
+);
+
+app.get(
+  '/api/get-cards',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.getCards(req, res, db),
+);
+
+app.delete(
+  '/api/delete-card',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.deleteCard(req, res, db),
+);
+
+app.put(
+  '/api/edit-card',
+  requireAuth,
+  (req: express.Request, res: express.Response) => cards.editCard(req, res, db),
 );
 
 /* */

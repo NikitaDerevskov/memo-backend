@@ -56,7 +56,7 @@ const handleRegistration = async (
     );
 
     await redisClient.set(token, id);
-    return res.send(token);
+    return res.send({ token, name: user[0]?.name });
   }
   return res.status(500).json('Error in insert data in db');
 };

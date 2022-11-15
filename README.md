@@ -36,3 +36,4 @@ This project was created for the purpose of testing. Where can I check some thin
 - [x] Add good readme
 - [ ] Verify email
 - [ ] Refactor please
+- [ ] Rewrite to nest :)
